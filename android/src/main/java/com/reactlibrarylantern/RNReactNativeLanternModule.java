@@ -6,9 +6,11 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
+import android.os.Build;
 
 public class RNReactNativeLanternModule extends ReactContextBaseJavaModule {
 
@@ -19,6 +21,7 @@ public class RNReactNativeLanternModule extends ReactContextBaseJavaModule {
     this.reactContext = reactContext;
   }
 
+  @TargetApi(Build.VERSION_CODES.M)
   @ReactMethod
   public void turnOn() {
     try {
@@ -38,6 +41,7 @@ public class RNReactNativeLanternModule extends ReactContextBaseJavaModule {
     }
   }
 
+  @TargetApi(Build.VERSION_CODES.M)
   @ReactMethod
   public void turnOff() {
     try {
