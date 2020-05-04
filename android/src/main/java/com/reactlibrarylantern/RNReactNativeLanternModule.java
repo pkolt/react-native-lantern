@@ -33,7 +33,7 @@ public class RNReactNativeLanternModule extends ReactContextBaseJavaModule {
           break;
         }
       }
-    } catch (Exeption e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -52,7 +52,7 @@ public class RNReactNativeLanternModule extends ReactContextBaseJavaModule {
           break;
         }
       }
-    } catch (Exeption e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
