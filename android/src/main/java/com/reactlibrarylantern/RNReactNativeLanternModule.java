@@ -26,7 +26,7 @@ public class RNReactNativeLanternModule extends ReactContextBaseJavaModule {
       CameraManager cameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
       String[] camIds = cameraManager.getCameraIdList();
       for (String cameraId : camIds) {
-        CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(id);
+        CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
         boolean isAvailableFlash = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
         if (isAvailableFlash) {
           cameraManager.setTorchMode(cameraId, true);
@@ -45,7 +45,7 @@ public class RNReactNativeLanternModule extends ReactContextBaseJavaModule {
       CameraManager cameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
       String[] camIds = cameraManager.getCameraIdList();
       for (String cameraId : camIds) {
-        CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(id);
+        CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
         boolean isAvailableFlash = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
         if (isAvailableFlash) {
           cameraManager.setTorchMode(cameraId, true);
