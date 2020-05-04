@@ -22,17 +22,15 @@ public class RNReactNativeLanternModule extends ReactContextBaseJavaModule {
   }
 
   @TargetApi(Build.VERSION_CODES.M)
-  @ReactMethod
-  public void turnOn() {
+  private void turn(Context context, boolean state) {
     try {
-      Context context = getReactApplicationContext();
       CameraManager cameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
       String[] camIds = cameraManager.getCameraIdList();
       for (String cameraId : camIds) {
         CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
         boolean isAvailableFlash = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
         if (isAvailableFlash) {
-          cameraManager.setTorchMode(cameraId, true);
+          cameraManager.setTorchMode(cameraId, state);
           break;
         }
       }
@@ -43,22 +41,16 @@ public class RNReactNativeLanternModule extends ReactContextBaseJavaModule {
 
   @TargetApi(Build.VERSION_CODES.M)
   @ReactMethod
+  public void turnOn() {
+    Context context = getReactApplicationContext();
+    turn(context, true);
+  }
+
+  @TargetApi(Build.VERSION_CODES.M)
+  @ReactMethod
   public void turnOff() {
-    try {
-      Context context = getReactApplicationContext();
-      CameraManager cameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
-      String[] camIds = cameraManager.getCameraIdList();
-      for (String cameraId : camIds) {
-        CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
-        boolean isAvailableFlash = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
-        if (isAvailableFlash) {
-          cameraManager.setTorchMode(cameraId, true);
-          break;
-        }
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    Context context = getReactApplicationContext();
+    turn(context, false);
   }
 
   @Override
