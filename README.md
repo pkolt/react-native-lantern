@@ -1,6 +1,8 @@
 
 # react-native-lantern
 
+## Warning!!! Support only Android (>= API 23 (Android 6.0))
+
 ## Getting started
 
 `npm i react-native-lantern`
@@ -18,14 +20,14 @@
   - Add `import com.reactlibrary.ReactNativeLanternPackage;` to the imports at the top of the file
   - Add `new ReactNativeLanternPackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
-  	```
-  	include ':react-native-lantern'
-  	project(':react-native-lantern').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-lantern/android')
-  	```
+      ```
+      include ':react-native-lantern'
+      project(':react-native-lantern').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-lantern/android')
+      ```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
+      ```
       compile project(':react-native-lantern')
-  	```
+      ```
 
 
 ## Usage
@@ -35,37 +37,72 @@ import { View, Button } from 'react-native';
 import lantern from 'react-native-lantern';
 
 const Main = () => {
-	const [isDisabled, setDisabled] = useState(true);
-	const [isTurnOn, setTurnState] = useState(false);
+    const [isDisabled, setDisabled] = useState(true);
+    const [isTurnOn, setTurnState] = useState(false);
 
-	useEffect(() => {
-		// call on change turn state (fire on subscribe, return current turn state)
-		const unsubscribe = subscribe(setTurnState);
-		return unsubscribe;
-	}, []);
+    useEffect(() => {
+        // call on change turn state (fire on subscribe, return current turn state)
+        const unsubscribe = subscribe(setTurnState);
+        return unsubscribe;
+    }, []);
 
-	useEffect(() => {
-		(async () => {
-			// initialize module
-			await lantern.ready();
-			setDisabled(false);
-		})();
-	}, []);
+    useEffect(() => {
+        (async () => {
+            // initialize module
+            await lantern.ready();
+            setDisabled(false);
+        })();
+    }, []);
 
-	const onPress = useCallback(async () => {
-		if (isTurnOn) {
-			await lantern.turnOff();
-		} else {
-			await lantern.turnOn();
-		}
-		// or `await lantern.turn(!isTurnOn)`
-	}, [isTurnOn]);
+    const onPress = useCallback(async () => {
+        if (isTurnOn) {
+            await lantern.turnOff();
+        } else {
+            await lantern.turnOn();
+        }
+        // or `await lantern.turn(!isTurnOn)`
+    }, [isTurnOn]);
 
-	return (
-		<View>
-			<Button title={isTurnOn ? 'Off' : 'On'} onPress={onPress} disabled={isDisabled} />
-		</View>
-	);
+    return (
+        <View>
+            <Button title={isTurnOn ? 'Off' : 'On'} onPress={onPress} disabled={isDisabled} />
+        </View>
+    );
 }
 ```
-  
+
+## API
+
+### ready() -> Promise
+
+  Initialize flashlight. This method should be called at the very beginning, before calling other methods.
+
+### turn(turnState) -> Promise
+
+  Change turn (on/off).
+
+#### `turnState {Boolean}`
+
+### turnOn() -> Promise
+
+  Turn on flashlight.
+
+### turnOff() -> Promise
+
+  Turn off flashlight.
+
+### subscribe(cb) -> unsubscribe
+
+  Subscribing to a state change.
+
+#### `cb {Function}`
+
+  Function that will be called when the `turnState` changes. The first argument of the function - `turnState`.
+
+#### `unsubscribe {Function}`
+
+  Unsubscribe from listening to changes `turnState`.
+
+## License
+
+  [MIT](LICENSE.md)
