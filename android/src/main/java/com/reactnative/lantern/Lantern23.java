@@ -68,7 +68,7 @@ final public class Lantern23 extends LanternBase {
         }
     }
 
-    public boolean isTurnOn() {
+    public boolean getTurnState() {
         return turnState;
     }
 }

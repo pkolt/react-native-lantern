@@ -1,6 +1,7 @@
 
 package com.reactnative.lantern;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -56,8 +57,8 @@ public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public boolean isTurnOn() {
-    return lantern.isTurnOn();
+  public void requestTurnState(Callback cb) {
+    cb.invoke(lantern.getTurnState());
   }
 
   @Override

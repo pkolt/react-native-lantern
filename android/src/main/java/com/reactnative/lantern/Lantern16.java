@@ -33,7 +33,7 @@ public final class Lantern16 extends LanternBase {
         }
     }
 
-    public boolean isTurnOn() {
+    public boolean getTurnState() {
         String flashMode = camParams.getFlashMode();
         return flashMode.equals(Camera.Parameters.FLASH_MODE_TORCH);
     }
