@@ -42,7 +42,7 @@ const Main = () => {
 
     useEffect(() => {
         // call on change turn state (fire on subscribe, return current turn state)
-        const unsubscribe = subscribe(setTurnState);
+        const unsubscribe = lantern.subscribe(setTurnState);
         return unsubscribe;
     }, []);
 

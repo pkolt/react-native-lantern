@@ -7,8 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "flashlight",
+    "torch"
   ],
+  "bugs": {
+    "url": "https://github.com/pkolt/react-native-lantern/issues",
+    "email": "pkoltyshev@gmail.com"
+  },
+  "repository": "pkolt/react-native-lantern",
   "author": "Pavel Koltyshev <pkoltyshev@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
