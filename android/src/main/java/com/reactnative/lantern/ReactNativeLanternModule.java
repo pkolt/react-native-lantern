@@ -8,6 +8,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
 import android.os.Build;
+import android.net.ssl;
 
 public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
 
