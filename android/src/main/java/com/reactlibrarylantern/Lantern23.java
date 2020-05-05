@@ -10,7 +10,7 @@ import android.os.Build;
 @TargetApi(Build.VERSION_CODES.M)
 final public class Lantern23 extends LanternBase {
     private CameraManager camManager;
-    private String camId;
+    private String camId = "";
     private boolean turnState = false;
 
     public Lantern23(Context context) {
@@ -44,19 +44,21 @@ final public class Lantern23 extends LanternBase {
     }
 
     private String findCameraId() {
+        String res = "";
         try {
             String[] camIds = camManager.getCameraIdList();
             for (String camId : camIds) {
                 CameraCharacteristics characteristics = camManager.getCameraCharacteristics(camId);
                 boolean isAvailableFlash = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
                 if (isAvailableFlash) {
-                    return camId;
+                    res = camId;
+                    break;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return res;
     }
 
     public void turn(boolean state) {
