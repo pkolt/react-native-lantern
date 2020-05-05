@@ -73,9 +73,7 @@ public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
   }
 
   private void showText(String text) {
-    Toast toast = Toast.makeText(this.reactContext, text, Toast.LENGTH_SHORT);
-    toast.setMargin(50,50);
-    toast.show();
+    Toast.makeText(getReactApplicationContext(), text, Toast.LENGTH_SHORT).show();
   }
 
   private String findCameraId() {
