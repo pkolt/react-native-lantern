@@ -10,7 +10,6 @@ import com.facebook.react.bridge.ReactMethod;
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
-import android.widget.Toast;
 
 public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
 
@@ -23,38 +22,30 @@ public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
     super(reactContext);
     this.reactContext = reactContext;
 
-    showText("start init");
-
     // >= API 23 (Android 6.0)
-    try {
-      camManager = (CameraManager) reactContext.getSystemService(Context.CAMERA_SERVICE);
-      camId = findCameraId();
+    camManager = (CameraManager) reactContext.getSystemService(Context.CAMERA_SERVICE);
+    camId = findCameraId();
 
-      CameraManager.TorchCallback torchCallback = new CameraManager.TorchCallback() {
-        @Override
-        public void onTorchModeChanged(String id, boolean enabled) {
-          super.onTorchModeChanged(id, enabled);
-          if (camId.equals(id)) {
-              turnState = enabled;
-          }
+    CameraManager.TorchCallback torchCallback = new CameraManager.TorchCallback() {
+      @Override
+      public void onTorchModeChanged(String id, boolean enabled) {
+        super.onTorchModeChanged(id, enabled);
+        if (camId.equals(id)) {
+          turnState = enabled;
         }
+      }
 
-        @Override
-        public void onTorchModeUnavailable(String id) {
-          super.onTorchModeUnavailable(id);
-          if (camId.equals(id)) {
-              camId = findCameraId();
-          }
+      @Override
+      public void onTorchModeUnavailable(String id) {
+        super.onTorchModeUnavailable(id);
+        if (camId.equals(id)) {
+          camId = findCameraId();
         }
-      };
+      }
+    };
 
-      // fires onTorchModeChanged upon register
-      camManager.registerTorchCallback(torchCallback, null);
-
-      showText("end init");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    // fires onTorchModeChanged upon register
+    camManager.registerTorchCallback(torchCallback, null);
 
     LifecycleEventListener lifecycleEventListener = new LifecycleEventListener() {
       @Override
@@ -70,10 +61,6 @@ public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
     };
 
     reactContext.addLifecycleEventListener(lifecycleEventListener);
-  }
-
-  private void showText(String text) {
-    Toast.makeText(getReactApplicationContext(), text, Toast.LENGTH_SHORT).show();
   }
 
   private String findCameraId() {
