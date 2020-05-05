@@ -31,6 +31,7 @@ public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
     return "ReactNativeLantern";
   }
 
+  @ReactMethod
   private void ready(Promise promise) {
     if (isReady) {
       promise.resolve(null);
