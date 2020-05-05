@@ -22,17 +22,19 @@ final public class Lantern23 extends LanternBase {
                 @Override
                 public void onTorchModeChanged(String id, boolean enabled) {
                     super.onTorchModeChanged(id, enabled);
-                    if (camId.equals(id)) {
-                        turnState = enabled;
-                    }
+//                    if (camId.equals(id)) {
+//                        turnState = enabled;
+//                    }
+                    turnState = enabled;
                 }
 
                 @Override
                 public void onTorchModeUnavailable(String id) {
                     super.onTorchModeUnavailable(id);
-                    if (camId.equals(id)) {
-                        camId = findCameraId();
-                    }
+//                    if (camId.equals(id)) {
+//                        camId = findCameraId();
+//                    }
+                    camId = findCameraId();
                 }
             };
 
