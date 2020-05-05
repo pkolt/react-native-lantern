@@ -82,6 +82,7 @@ public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
 
       reactContext.addLifecycleEventListener(lifecycleEventListener);
 
+      isReady = true;
       promise.resolve(null);
     } catch (Exception e) {
       promise.reject(e);
