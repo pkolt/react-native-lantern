@@ -91,13 +91,13 @@ const Main = () => {
 
   Turn off flashlight.
 
-### subscribe(cb) -> unsubscribe
+### subscribe(onChangeTurnState) -> unsubscribe
 
   Subscribing to a state change.
 
-#### `cb {Function}`
+#### `onChangeTurnState {Function}`
 
-  Function that will be called when the `turnState` changes. The first argument of the function - `turnState`.
+  Function that will be called when the `turnState` changes. The first argument of the function `turnState`.
 
 #### `unsubscribe {Function}`
 
