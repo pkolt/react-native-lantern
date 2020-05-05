@@ -97,7 +97,7 @@ const Main = () => {
 
 #### `onChangeTurnState {Function}`
 
-  Function that will be called when the `turnState` changes. The first argument of the function `turnState`.
+  Function that will be called when the `turnState` changes. The first argument of the function `turnState`. Will be called when subscribing.
 
 #### `unsubscribe {Function}`
 
