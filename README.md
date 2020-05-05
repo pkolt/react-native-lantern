@@ -3,11 +3,11 @@
 
 ## Getting started
 
-`$ npm install react-native-lantern --save`
+`npm i react-native-lantern`
 
 ### Mostly automatic installation
 
-`$ react-native link react-native-lantern`
+`npx react-native link react-native-lantern`
 
 ### Manual installation
 
@@ -30,9 +30,42 @@
 
 ## Usage
 ```javascript
-import ReactNativeLantern from 'react-native-lantern';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Button } from 'react-native';
+import lantern from 'react-native-lantern';
 
-// TODO: What to do with the module?
-ReactNativeLantern;
+const Main = () => {
+	const [isDisabled, setDisabled] = useState(true);
+	const [isTurnOn, setTurnState] = useState(false);
+
+	useEffect(() => {
+		// call on change turn state (fire on subscribe, return current turn state)
+		const unsubscribe = subscribe(setTurnState);
+		return unsubscribe;
+	}, []);
+
+	useEffect(() => {
+		(async () => {
+			// initialize module
+			await lantern.ready();
+			setDisabled(false);
+		})();
+	}, []);
+
+	const onPress = useCallback(async () => {
+		if (isTurnOn) {
+			await lantern.turnOff();
+		} else {
+			await lantern.turnOn();
+		}
+		// or `await lantern.turn(!isTurnOn)`
+	}, [isTurnOn]);
+
+	return (
+		<View>
+			<Button title={isTurnOn ? 'Off' : 'On'} onPress={onPress} disabled={isDisabled} />
+		</View>
+	);
+}
 ```
   
