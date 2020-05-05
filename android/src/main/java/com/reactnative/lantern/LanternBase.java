@@ -1,4 +1,4 @@
-package com.reactlibrarylantern;
+package com.reactnative.lantern;
 
 public abstract class LanternBase {
     abstract public void turn(boolean state);

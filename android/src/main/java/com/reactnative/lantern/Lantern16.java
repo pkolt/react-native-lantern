@@ -1,4 +1,4 @@
-package com.reactlibrarylantern;
+package com.reactnative.lantern;
 
 import android.hardware.Camera;
 

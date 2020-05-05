@@ -1,19 +1,19 @@
 
-package com.reactlibrarylantern;
+package com.reactnative.lantern;
 
+import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 
 import android.os.Build;
 
-public class RNReactNativeLanternModule extends ReactContextBaseJavaModule {
+public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
   private LanternBase lantern;
 
-  public RNReactNativeLanternModule(ReactApplicationContext reactContext) {
+  public ReactNativeLanternModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
 
@@ -23,6 +23,21 @@ public class RNReactNativeLanternModule extends ReactContextBaseJavaModule {
     } else {
       lantern = new Lantern16();
     }
+
+    LifecycleEventListener lifecycleEventListener = new LifecycleEventListener() {
+      @Override
+      public void onHostResume() {}
+
+      @Override
+      public void onHostPause() {}
+
+      @Override
+      public void onHostDestroy() {
+        lantern.turnOff();
+      }
+    };
+
+    reactContext.addLifecycleEventListener(lifecycleEventListener);
   }
 
   @ReactMethod
