@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactMethod;
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
+import android.os.Handler;
 
 public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
 
@@ -45,7 +46,7 @@ public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
     };
 
     // fires onTorchModeChanged upon register
-    camManager.registerTorchCallback(torchCallback, null);
+    camManager.registerTorchCallback(torchCallback, new Handler());
 
     LifecycleEventListener lifecycleEventListener = new LifecycleEventListener() {
       @Override
