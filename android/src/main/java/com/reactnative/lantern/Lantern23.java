@@ -18,26 +18,26 @@ final public class Lantern23 extends LanternBase {
             camManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
             camId = findCameraId();
 
-//            CameraManager.TorchCallback torchCallback = new CameraManager.TorchCallback() {
-//                @Override
-//                public void onTorchModeChanged(String id, boolean enabled) {
-//                    super.onTorchModeChanged(id, enabled);
-//                    if (camId.equals(id)) {
-//                        turnState = enabled;
-//                    }
-//                }
-//
-//                @Override
-//                public void onTorchModeUnavailable(String id) {
-//                    super.onTorchModeUnavailable(id);
-//                    if (camId.equals(id)) {
-//                        camId = findCameraId();
-//                    }
-//                }
-//            };
-//
-//             // fires onTorchModeChanged upon register
-//            camManager.registerTorchCallback(torchCallback, null);
+            CameraManager.TorchCallback torchCallback = new CameraManager.TorchCallback() {
+                @Override
+                public void onTorchModeChanged(String id, boolean enabled) {
+                    super.onTorchModeChanged(id, enabled);
+                    if (camId.equals(id)) {
+                        turnState = enabled;
+                    }
+                }
+
+                @Override
+                public void onTorchModeUnavailable(String id) {
+                    super.onTorchModeUnavailable(id);
+                    if (camId.equals(id)) {
+                        camId = findCameraId();
+                    }
+                }
+            };
+
+             // fires onTorchModeChanged upon register
+            camManager.registerTorchCallback(torchCallback, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
