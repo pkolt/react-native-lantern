@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactMethod;
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
+import android.widget.Toast;
 
 public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
 
@@ -21,6 +22,8 @@ public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
   public ReactNativeLanternModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
+
+    showText("start init");
 
     // >= API 23 (Android 6.0)
     try {
@@ -47,6 +50,8 @@ public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
 
       // fires onTorchModeChanged upon register
       camManager.registerTorchCallback(torchCallback, null);
+
+      showText("end init");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -60,11 +65,17 @@ public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
 
       @Override
       public void onHostDestroy() {
-
+        turnOff();
       }
     };
 
     reactContext.addLifecycleEventListener(lifecycleEventListener);
+  }
+
+  private void showText(String text) {
+    Toast toast = Toast.makeText(this.reactContext, text, Toast.LENGTH_SHORT);
+    toast.setMargin(50,50);
+    toast.show();
   }
 
   private String findCameraId() {
