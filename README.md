@@ -15,8 +15,8 @@
 #### Android
 
 1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNReactNativeLanternPackage;` to the imports at the top of the file
-  - Add `new RNReactNativeLanternPackage()` to the list returned by the `getPackages()` method
+  - Add `import com.reactlibrary.ReactNativeLanternPackage;` to the imports at the top of the file
+  - Add `new ReactNativeLanternPackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
   	```
   	include ':react-native-lantern'
@@ -30,9 +30,9 @@
 
 ## Usage
 ```javascript
-import RNReactNativeLantern from 'react-native-lantern';
+import ReactNativeLantern from 'react-native-lantern';
 
 // TODO: What to do with the module?
-RNReactNativeLantern;
+ReactNativeLantern;
 ```
   

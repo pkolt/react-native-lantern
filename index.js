@@ -1,6 +1,6 @@
 
 import { NativeModules } from 'react-native';
 
-const { RNReactNativeLantern } = NativeModules;
+const { ReactNativeLantern } = NativeModules;
 
-export default RNReactNativeLantern;
+export default ReactNativeLantern;
