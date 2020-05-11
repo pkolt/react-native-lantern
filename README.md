@@ -1,6 +1,8 @@
 
 # react-native-lantern
 
+Flashlight support on React Native
+
 ## Warning!!! Support only Android (>= API 23 (>= Android 6.0))
 
 ## Getting started
@@ -18,7 +20,6 @@
 
 1. Open up `android/app/src/main/java/[...]/MainApplication.java`
   - Add `import com.reactnative.lantern.ReactNativeLanternPackage;` to the imports at the top of the file
-  - Add `new ReactNativeLanternPackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
       ```
       include ':react-native-lantern'
