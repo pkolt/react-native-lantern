@@ -51,7 +51,7 @@ public class ReactNativeLanternModule extends ReactContextBaseJavaModule {
             params.putBoolean("value", enabled);
             reactContext
                     .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                    .emit("onChangeTurnState", params);
+                    .emit("onTurn", params);
           }
         }
 

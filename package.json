@@ -18,7 +18,7 @@
   "repository": "pkolt/react-native-lantern",
   "author": "Pavel Koltyshev <pkoltyshev@gmail.com>",
   "license": "MIT",
-  "peerDependencies": {
-    "react-native": "0.41.2"
+  "dependencies": {
+    "react-native": "0.62.2"
   }
 }

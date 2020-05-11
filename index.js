@@ -3,11 +3,11 @@ import { NativeModules, NativeEventEmitter } from 'react-native';
 
 const { ReactNativeLantern } = NativeModules;
 
-const subscribe = (cb) => {
+const subscribe = (eventName, callback) => {
     const eventEmitter = new NativeEventEmitter(ReactNativeLantern);
     const eventListener = eventEmitter.addListener(
-        'onChangeTurnState',
-        (event) => cb(event.value),
+        eventName,
+        (event) => callback(event),
     );
     return () => eventListener.remove();
 }

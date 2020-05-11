@@ -1,7 +1,7 @@
 
 # react-native-lantern
 
-## Warning!!! Support only Android (>= API 23 (Android 6.0))
+## Warning!!! Support only Android (>= API 23 (>= Android 6.0))
 
 ## Getting started
 
@@ -9,20 +9,20 @@
 
 ### Mostly automatic installation
 
-`npx react-native link react-native-lantern`
+`npx react-native link react-native-lantern` (use `npx react-native unlink react-native-lantern` to uninstall)
 
 ### Manual installation
 
 
 #### Android
 
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.ReactNativeLanternPackage;` to the imports at the top of the file
+1. Open up `android/app/src/main/java/[...]/MainApplication.java`
+  - Add `import com.reactnative.lantern.ReactNativeLanternPackage;` to the imports at the top of the file
   - Add `new ReactNativeLanternPackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
       ```
       include ':react-native-lantern'
-      project(':react-native-lantern').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-lantern/android')
+      project(':react-native-lantern').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-lantern/android')
       ```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
       ```
@@ -42,7 +42,7 @@ const Main = () => {
 
     useEffect(() => {
         // call on change turn state (fire on subscribe, return current turn state)
-        const unsubscribe = lantern.subscribe(setTurnState);
+        const unsubscribe = lantern.subscribe('onTurn', (event) => setTurnState(event.value));
         return unsubscribe;
     }, []);
 
@@ -73,35 +73,25 @@ const Main = () => {
 
 ## API
 
-### ready() -> Promise
+### ready() -> Promise<void>
 
   Initialize flashlight. This method should be called at the very beginning, before calling other methods.
 
-### turn(turnState) -> Promise
+### turn(<Boolean>turnState) -> Promise<void>
 
   Change turn (on/off).
 
-#### `turnState {Boolean}`
-
-### turnOn() -> Promise
+### turnOn() -> Promise<void>
 
   Turn on flashlight.
 
-### turnOff() -> Promise
+### turnOff() -> Promise<void>
 
   Turn off flashlight.
 
-### subscribe(onChangeTurnState) -> unsubscribe
+### subscribe(<String>eventName, <Function>callback) -> <Function>unsubscribe
 
-  Subscribing to a state change.
-
-#### `onChangeTurnState {Function}`
-
-  Function that will be called when the `turnState` changes. The first argument of the function `turnState`. Will be called when subscribing.
-
-#### `unsubscribe {Function}`
-
-  Unsubscribe from listening to changes `turnState`.
+  Subscribing to event. Use the `onTurn` event to subscribe to a state change `turnState`.
 
 ## License
 
