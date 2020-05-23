@@ -9,12 +9,11 @@ Flashlight support on React Native
 
 `npm i react-native-lantern`
 
-### Mostly automatic installation
+### Automatic installation
 
 `npx react-native link react-native-lantern` (use `npx react-native unlink react-native-lantern` to uninstall)
 
 ### Manual installation
-
 
 #### Android
 
@@ -93,6 +92,26 @@ const Main = () => {
 ### subscribe(<String>eventName, <Function>callback) -> <Function>unsubscribe
 
   Subscribing to event. Use the `onTurn` event to subscribe to a state change `turnState`.
+
+## FAQ
+
+### When running Jest tests, an error occurs `react-native-lantern: NativeModule.ReactNativeLantern is null`.
+
+This is due to the fact that when running Jest tests, there is no native implementation of the module.
+You need to add a mock file:
+
+```
+// __mocks__/react-native-lantern.ts
+const lanternMockModule = {
+  ready: jest.fn(() => Promise.resolve()),
+  turn: jest.fn(() => Promise.resolve()),
+  turnOn: jest.fn(() => Promise.resolve()),
+  turnOff: jest.fn(() => Promise.resolve()),
+  subscribe: jest.fn(() => () => {}),
+};
+
+export default lanternMockModule;
+```
 
 ## License
 
